@@ -1,0 +1,42 @@
+´òÇò
+f9
+#showtooltip
+/cast [@mouseover,harm,nodead][]µ¹´ÌÉä»÷
+/cast [@mouseover,harm,nodead][]!×Ô¶¯Éä»÷
+/petattack [@mouseover,harm,nodead][]
+/cast [@mouseover,harm,nodead][]ÅÄ»÷
+/cast [@mouseover,harm,nodead][]×¦»÷
+/cast [@mouseover,harm,nodead][]ËºÒ§
+
+
+
+f10
+#showtooltip
+/cast [@mouseover,harm,nodead][]É±Â¾ÃüÁî
+/cast [@mouseover,harm,nodead][]!×Ô¶¯Éä»÷
+/petattack [@mouseover,harm,nodead][]
+/cast [@mouseover,harm,nodead][]ÅÄ»÷
+/cast [@mouseover,harm,nodead][]×¦»÷
+/cast [@mouseover,harm,nodead][]ËºÒ§
+
+
+f11
+#showtooltip
+/cast [@mouseover,harm,nodead][]ÑÛ¾µÉßÉä»÷
+/cast [@mouseover,harm,nodead][]!×Ô¶¯Éä»÷
+/petattack [@mouseover,harm,nodead][]
+/cast [@mouseover,harm,nodead][]ÅÄ»÷
+/cast [@mouseover,harm,nodead][]×¦»÷
+/cast [@mouseover,harm,nodead][]ËºÒ§
+
+
+f12
+#showtooltip
+/cast [@mouseover,harm,nodead][]¶àÖØÉä»÷
+/cast [@mouseover,harm,nodead][]!×Ô¶¯Éä»÷
+/petattack [@mouseover,harm,nodead][]
+/cast [@mouseover,harm,nodead][]ÅÄ»÷
+/cast [@mouseover,harm,nodead][]×¦»÷
+/cast [@mouseover,harm,nodead][]ËºÒ§
+
+https://bbs.nga.cn/read.php?&tid=26304451
