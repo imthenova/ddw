@@ -170,7 +170,6 @@ function ddwSubtletyPlay(ddw,f,g)
 				f.textures[0]:SetColorTexture(0.8, 0.8, 0.8) --kidney_hit =
 				g.textures[0]:SetColorTexture(0.8, 0.8, 0.8) --kidney_hit =
 			end
-			print("usingKidneyHit");
 		elseif aoeAndStBurst ~= nil and aoeAndStBurst then
 			if cd_xiujian_storm >= ddw.cd_gcd+0.1 and cd_snd >= ddw.cd_gcd+0.1 and cd_flagellation >= ddw.cd_gcd+0.1 then
 				aoeAndStBurst = false;
@@ -200,7 +199,6 @@ function ddwSubtletyPlay(ddw,f,g)
 					g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); --"333333" F9
 				end
 			end
-			print("aoeAndStBurst");
 		elseif StBurst ~= nil and StBurst then
 			if cd_snd >= ddw.cd_gcd+0.1 and cd_flagellation >= ddw.cd_gcd+0.1 then
 				StBurst = false;
@@ -227,7 +225,6 @@ function ddwSubtletyPlay(ddw,f,g)
 					g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); --"333333" F9
 				end
 			end
-			print("StBurst");
 		elseif aoeBurst ~= nil and aoeBurst then
 			if cd_xiujian_storm >= ddw.cd_gcd+0.1 and cd_snd >= ddw.cd_gcd+0.1 then
 				aoeBurst = false;
@@ -248,7 +245,6 @@ function ddwSubtletyPlay(ddw,f,g)
 					g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); --"333333" F9
 				end
 			end
-			print("aoeBurst");
 		end
 end
 
