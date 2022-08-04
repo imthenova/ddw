@@ -126,7 +126,7 @@ function ygzSurvivalPlay(ygz, f, g)
         -- 单人或者jjc，95血量就高优先级治疗宠物
         g.textures[0]:SetColorTexture(1, 0.8, 0.8) --浅粉色 旋风斩 7
         aoe_finalSpell = "heal_pet";
-    elseif isYgzAuto and cd_echoshot <= ygz.cd_gcd and ygz.tHealth > burst_HP then
+    elseif isYgzAuto and cd_echoshot <= ygz.cd_gcd and ygz.tHealth > burst_HP/2 then
         --爆发
         if ygz.tHealth > big_burse_HP then
             g.textures[0]:SetColorTexture(0, 0, 1)
