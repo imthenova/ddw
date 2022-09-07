@@ -42,6 +42,15 @@ function mwGetCoolDown(spellName)
 	return cd;
 end
 
+function mwGetItemCoolDown(itemID)
+	local start,durantion,enable=GetItemCooldown(itemID); -- CD
+	local cd=0;
+	if (start~=nil and start~=0) then
+		cd=durantion + start - GetTime();
+	end
+	return cd;
+end
+
 function mwGetBuffCount(spellName)
 	local count = select(3,AuraUtil.FindAuraByName(spellName,"player",'HELPFUL'));--buff 层数
 	if count == nil then
