@@ -242,7 +242,7 @@ do
 	--tex:SetPoint("TOP", f.Background, "TOP", 0, 0)
 	--tex:SetPoint("BOTTOM", f.Background, "BOTTOM", 0, 0)
 	tex:SetAllPoints(f)
-	tex:SetColorTexture(1, 0, 0)
+	tex:SetColorTexture(1, 0.8, 0.8)
 	--tex:SetWidth(f:GetWidth()/f.NUM_SEGMENTS)
 	--tex:SetPoint("LEFT")
 	f:Show()
