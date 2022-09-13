@@ -54,13 +54,16 @@ function ygzSurvivalPlay(ygz, f, g)
     local wildfire_bomb_time = 0.2 * ygz.inRange;
     if wildfire_bomb_time > 0.8 then wildfire_bomb_time = 0.8 end
     wildfire_bomb_time = wildfire_bomb_time * 14; --todo 14 是野火cd
-    local aoe_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= wildfire_bomb_time)
+    local aoe_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= wildfire_bomb_time*14)
             or (currentCharges_wildfire_bomb >= 1 and buff_mad_bombardier > 0.2);
     local st_cap_usable_kill_command = ygz.focus < 90 and (currentCharges_kill_command >= 2 or currentCharges_kill_command == 1 and fullchargetime_kill_command <= ygz.cd_gcd);
-    local aoe_cap_usable_carve = cd_carve <= ygz.cd_gcd and ygz.focus >= 35 and currentCharges_wildfire_bomb == 0;
+    local aoe_cap_usable_carve = cd_carve <= ygz.cd_gcd and ygz.focus >= 35 and
+            (currentCharges_wildfire_bomb == 0 or
+                (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb >= 4)
+            );
     local carve_time = 0.5*ygz.inRange;
     local aoe_usable_carve = cd_carve <= ygz.cd_gcd and ygz.focus >= 35 and currentCharges_wildfire_bomb <= 1 and fullchargetime_wildfire_bomb >= carve_time;
-    local aoe_redbomb_kill_command = buff_mad_bombardier <= 0.1 and debuff_pheromone_bomb > 0.1;
+    local aoe_redbomb_kill_command = buff_mad_bombardier <= 0.01 and debuff_pheromone_bomb > 0.01;
     local aoe_kill_command = ygz.focus <= 90 and currentCharges_kill_command>=1;
 
     --single
@@ -118,8 +121,8 @@ function ygzSurvivalPlay(ygz, f, g)
         f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
     end
     --aoe
-    if ygz.tHealth < finish_HP / 3 then
-        --单体怪没血了猛禽收尾 收尾血量是单体的1/3
+    if ygz.tHealth < finish_HP / 20 then
+        --单体怪没血了猛禽收尾 收尾血量是单体的1/5 = 1000
         g.textures[0]:SetColorTexture(0.8, 0.8, 0.8);        --猛禽 （同奥术）
         aoe_finalSpell = "bird_hit";
     elseif ygz.cd_heal_pet <= ygz.cd_gcd and ygz.petPerHealth <= 95 and members < 3 then
@@ -147,9 +150,13 @@ function ygzSurvivalPlay(ygz, f, g)
         g.textures[0]:SetColorTexture(0, 0, 0) --黑 致死两层 2
         aoe_finalSpell = "kill_command";
     elseif aoe_usable_wildfire_bomb then
-        -- 野火炸弹不溢出（同眼镜蛇射击）
-        g.textures[0]:SetColorTexture(0, 1, 0) --野火
-        aoe_finalSpell = "wildfire_bomb";
+        if bomb_color=="green" and debuff_serpent_sting == nil then
+            g.textures[0]:SetColorTexture(0, 1, 1);        --青钉刺 （同倒刺射击）
+            aoe_finalSpell = "serpent_sting";
+        else
+            g.textures[0]:SetColorTexture(0, 1, 0) --野火
+            aoe_finalSpell = "wildfire_bomb";
+        end
     elseif aoe_usable_carve then
         g.textures[0]:SetColorTexture(0, 0.4, 0.4) --削凿
         aoe_finalSpell = "carve";
