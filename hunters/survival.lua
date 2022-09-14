@@ -37,6 +37,7 @@ function ygzSurvivalPlay(ygz, f, g)
     local fullchargetime_kill_command = select(4, GetSpellCharges("杀戮命令")) - GetTime() + select(3, GetSpellCharges("杀戮命令"));
     local currentCharges_wildfire_bomb = select(1, GetSpellCharges("野火炸弹")); -- 野火炸弹可用次数
     local fullchargetime_wildfire_bomb = select(4, GetSpellCharges("野火炸弹")) - GetTime() + select(3, GetSpellCharges("野火炸弹"));
+    local cdTime_wildfire_bomb = select(4, GetSpellCharges("野火炸弹")); --野火cd时间
     local bomb_name = select(1, GetSpellInfo("野火炸弹"));
     local bomb_color;
     if bomb_name == "散射炸弹" then
@@ -46,6 +47,7 @@ function ygzSurvivalPlay(ygz, f, g)
     elseif bomb_name == "信息素炸弹" then
         bomb_color = "red";
     end
+
     --usable
     local st_cap_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= ygz.cd_gcd + 1)
             or (currentCharges_wildfire_bomb >= 1 and buff_mad_bombardier > 0.2);
@@ -53,8 +55,8 @@ function ygzSurvivalPlay(ygz, f, g)
             or (currentCharges_wildfire_bomb >= 1 and buff_mad_bombardier > 0.2);
     local wildfire_bomb_time = 0.2 * ygz.inRange;
     if wildfire_bomb_time > 0.8 then wildfire_bomb_time = 0.8 end
-    wildfire_bomb_time = wildfire_bomb_time * 14; --todo 14 是野火cd
-    local aoe_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= wildfire_bomb_time*14)
+    wildfire_bomb_time = wildfire_bomb_time * cdTime_wildfire_bomb;
+    local aoe_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= wildfire_bomb_time)
             or (currentCharges_wildfire_bomb >= 1 and buff_mad_bombardier > 0.2);
     local st_cap_usable_kill_command = ygz.focus < 90 and (currentCharges_kill_command >= 2 or currentCharges_kill_command == 1 and fullchargetime_kill_command <= ygz.cd_gcd);
     local aoe_cap_usable_carve = cd_carve <= ygz.cd_gcd and ygz.focus >= 35 and

@@ -137,6 +137,11 @@ local function YigeziDPSCommands()
 		ygz.petPerHealth = ceil(100 * ygz.petHealth / ygz.petMaxHealth);
 		--target inRange count
 		ygz.inRange = 0
+		for i = 1, 40 do
+			if UnitExists('nameplate' .. i) and UnitCanAttack("player","target") and CheckInteractDistance('nameplate' .. i,2) and UnitName('nameplate' .. i)~=nil and UnitName('nameplate' .. i)~="一個字" then
+				ygz.inRange = ygz.inRange + 1
+			end
+		end
 		--player
 		ygz.focus=UnitPower("player");
 		ygz.pHealth = UnitHealth("player");
@@ -211,7 +216,7 @@ do
 	f:SetFrameStrata("BACKGROUND")
 	f:SetWidth(40) -- Set these to whatever height/width is needed 
 	f:SetHeight(40) -- for your Texture
-	f:SetPoint("CENTER",-750,390)
+	f:SetPoint("CENTER",-500,300)
 	--f:SetPoint("CENTER",-100,100)
 
 	--f:EnableKeyboard(true)
@@ -252,7 +257,7 @@ do
 	g:SetFrameStrata("BACKGROUND")
 	g:SetWidth(40) -- Set these to whatever height/width is needed 
 	g:SetHeight(40) -- for your Texture
-	g:SetPoint("CENTER",-650,390)
+	g:SetPoint("CENTER",-400,300)
 	--f:SetPoint("CENTER",-100,100)
 
 	--f:EnableKeyboard(true)
@@ -282,7 +287,7 @@ do
 	h:SetFrameStrata("BACKGROUND")
 	h:SetWidth(60) -- Set these to whatever height/width is needed 
 	h:SetHeight(60) -- for your Texture
-	h:SetPoint("CENTER",-250,100)
+	h:SetPoint("CENTER",-350,100)
 	h.textures = {}
 	local tex = h:CreateTexture()
 	h.textures[0]=tex
