@@ -8,6 +8,7 @@ function ygzSurvivalPlay(ygz, f, g)
             break ;
         end
     end
+    local mwGCD = 1.5 / (UnitSpellHaste("player")/100 + 1);
     --env
     local members = GetNumGroupMembers();
     local burst_HP = 50000 * 0.8 * members;--动态20w
@@ -49,7 +50,7 @@ function ygzSurvivalPlay(ygz, f, g)
     end
 
     --usable
-    local st_cap_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= ygz.cd_gcd + 1)
+    local st_cap_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= mwGCD*2)
             or (currentCharges_wildfire_bomb >= 1 and buff_mad_bombardier > 0.2);
     local aoe_cap_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= ygz.cd_gcd)
             or (currentCharges_wildfire_bomb >= 1 and buff_mad_bombardier > 0.2);
@@ -58,13 +59,13 @@ function ygzSurvivalPlay(ygz, f, g)
     wildfire_bomb_time = wildfire_bomb_time * cdTime_wildfire_bomb;
     local aoe_usable_wildfire_bomb = currentCharges_wildfire_bomb >= 2 or (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb <= wildfire_bomb_time)
             or (currentCharges_wildfire_bomb >= 1 and buff_mad_bombardier > 0.2);
-    local st_cap_usable_kill_command = ygz.focus < 90 and (currentCharges_kill_command >= 2 or currentCharges_kill_command == 1 and fullchargetime_kill_command <= ygz.cd_gcd);
+    local st_cap_usable_kill_command = ygz.focus < 90 and (currentCharges_kill_command >= 2 or currentCharges_kill_command == 1 and fullchargetime_kill_command <= mwGCD);
     local aoe_cap_usable_carve = cd_carve <= ygz.cd_gcd and ygz.focus >= 35 and
             (currentCharges_wildfire_bomb == 0 or
-                (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb >= 4)
+                (currentCharges_wildfire_bomb == 1 and fullchargetime_wildfire_bomb > 4.5)
             );
-    local carve_time = 0.5*ygz.inRange;
-    local aoe_usable_carve = cd_carve <= ygz.cd_gcd and ygz.focus >= 35 and currentCharges_wildfire_bomb <= 1 and fullchargetime_wildfire_bomb >= carve_time;
+    --local carve_time = 0.5*ygz.inRange;
+    --local aoe_usable_carve = cd_carve <= ygz.cd_gcd and ygz.focus >= 35 and currentCharges_wildfire_bomb <= 1 and fullchargetime_wildfire_bomb >= carve_time;
     local aoe_redbomb_kill_command = buff_mad_bombardier <= 0.01 and debuff_pheromone_bomb > 0.01;
     local aoe_kill_command = ygz.focus <= 90 and currentCharges_kill_command>=1;
 
@@ -77,10 +78,17 @@ function ygzSurvivalPlay(ygz, f, g)
         -- 单人或者jjc，95血量就高优先级治疗宠物
         f.textures[0]:SetColorTexture(1, 0.8, 0.8) --浅粉色 旋风斩 7
         st_finalSpell = "heal_pet";
-    elseif ygz.focus >= 20 and (debuff_serpent_sting == nil or debuff_serpent_sting <= ygz.cd_gcd) then
+    elseif ygz.focus >= 20 and (debuff_serpent_sting == nil or debuff_serpent_sting <= ygz.cd_gcd) and ygz.tHealth>200000 and
+            (debuff_pheromone_bomb<=0 or (buff_mad_bombardier>0.1 and bomb_color=="red")) then
         --钉刺没有先上钉刺
         f.textures[0]:SetColorTexture(0, 1, 1);        --青钉刺 （同倒刺射击）
         st_finalSpell = "serpent_sting";
+    elseif ygz.focus >= 30 and (buffCount_tip_spear>=3 and (debuff_pheromone_bomb<=0 or (buff_mad_bombardier>1.1 and bomb_color=="red")))
+        or ygz.focus >= 30 and (bomb_color == "red" and buffCount_tip_spear >= 3 and
+            ((currentCharges_wildfire_bomb==1 and fullchargetime_wildfire_bomb<2*mwGCD or currentCharges_wildfire_bomb==0) or buff_mad_bombardier>0.1)
+            ) then
+        f.textures[0]:SetColorTexture(0.8, 0.8, 0.8);        --猛禽 （同奥术）
+        st_finalSpell = "bird_hit";
     elseif isYgzAuto and cd_echoshot <= ygz.cd_gcd and ygz.tHealth > burst_HP then
         --爆发
         if ygz.tHealth > big_burse_HP then
@@ -94,6 +102,10 @@ function ygzSurvivalPlay(ygz, f, g)
         -- 野火炸弹不溢出（同眼镜蛇射击）
         f.textures[0]:SetColorTexture(0, 1, 0) --野火
         st_finalSpell = "wildfire_bomb";
+    elseif buff_mad_bombardier<0.2 and debuff_pheromone_bomb>0.1 and currentCharges_kill_command >= 1  then
+        -- 杀戮命令
+        f.textures[0]:SetColorTexture(0, 0, 0) --黑 致死两层 2
+        st_finalSpell = "kill_command";
     elseif (cd_duomingsheji <= ygz.cd_gcd and ygz.focus >= 10 and ygz.tPerHealth <= 20) then
         -- 夺命射击 （斩杀）
         f.textures[0]:SetColorTexture(1, 0, 0) -- 斩杀 z
@@ -105,7 +117,7 @@ function ygzSurvivalPlay(ygz, f, g)
     elseif buffCount_tip_spear >= 3 or debuff_sanshe_bomb >= 0.2 then
         f.textures[0]:SetColorTexture(0.8, 0.8, 0.8);        --猛禽 （同奥术）
         st_finalSpell = "bird_hit";
-    elseif debuff_serpent_sting == nil or debuff_serpent_sting <= 3.8 then
+    elseif (debuff_serpent_sting == nil or debuff_serpent_sting <= 3.8) and ygz.tHealth>200000 then
         f.textures[0]:SetColorTexture(0, 1, 1);        --青钉刺 （同倒刺射击）
         st_finalSpell = "serpent_sting";
     elseif ygz.focus < 90 and currentCharges_kill_command >= 1 then
@@ -140,31 +152,29 @@ function ygzSurvivalPlay(ygz, f, g)
             g.textures[0]:SetColorTexture(1, 0, 1) --小爆发，共鸣箭 h
             aoe_finalSpell = "echo_shot";
         end
+    elseif aoe_cap_usable_carve then
+        g.textures[0]:SetColorTexture(0, 0.4, 0.4) --削凿
+        aoe_finalSpell = "carve";
+    elseif bomb_color=="red" and (debuff_serpent_sting == nil or debuff_serpent_sting <= 3.8) and (currentCharges_wildfire_bomb <= 1 and fullchargetime_wildfire_bomb>mwGCD)
+        and ygz.tHealth>400000 then
+        g.textures[0]:SetColorTexture(0, 1, 1);        --青钉刺 （同倒刺射击）
+        aoe_finalSpell = "serpent_sting";
     elseif aoe_cap_usable_wildfire_bomb then
         -- 野火炸弹不溢出（同眼镜蛇射击）
         g.textures[0]:SetColorTexture(0, 1, 0) --野火
         aoe_finalSpell = "wildfire_bomb";
-    elseif aoe_cap_usable_carve then
-        g.textures[0]:SetColorTexture(0, 0.4, 0.4) --削凿
-        aoe_finalSpell = "carve";
     elseif aoe_redbomb_kill_command then
         -- 杀戮命令
         g.textures[0]:SetColorTexture(0, 0, 0) --黑 致死两层 2
         aoe_finalSpell = "kill_command";
     elseif aoe_usable_wildfire_bomb then
-        if bomb_color=="green" and debuff_serpent_sting == nil then
-            g.textures[0]:SetColorTexture(0, 1, 1);        --青钉刺 （同倒刺射击）
-            aoe_finalSpell = "serpent_sting";
-        else
+        --if bomb_color=="green" and debuff_serpent_sting == nil then
+        --    g.textures[0]:SetColorTexture(0, 1, 1);        --青钉刺 （同倒刺射击）
+        --    aoe_finalSpell = "serpent_sting";
+        --else
             g.textures[0]:SetColorTexture(0, 1, 0) --野火
             aoe_finalSpell = "wildfire_bomb";
-        end
-    elseif aoe_usable_carve then
-        g.textures[0]:SetColorTexture(0, 0.4, 0.4) --削凿
-        aoe_finalSpell = "carve";
-    elseif bomb_color=="green" and debuff_serpent_sting == nil or debuff_serpent_sting <= 3.8 then
-        g.textures[0]:SetColorTexture(0, 1, 1);        --青钉刺 （同倒刺射击）
-        aoe_finalSpell = "serpent_sting";
+        --end
     elseif aoe_kill_command then
         -- 杀戮命令
         g.textures[0]:SetColorTexture(0, 0, 0) --黑 致死两层 2
@@ -173,10 +183,10 @@ function ygzSurvivalPlay(ygz, f, g)
         -- 夺命射击 （斩杀）
         g.textures[0]:SetColorTexture(1, 0, 0) -- 斩杀 z
         aoe_finalSpell = "kill_shot";
-    elseif debuff_serpent_sting == nil or debuff_serpent_sting <= 3.8 then
+    elseif (debuff_serpent_sting == nil or debuff_serpent_sting <= 3.8) and ygz.tHealth>200000 and ygz.focus>=20  then
         g.textures[0]:SetColorTexture(0, 1, 1);        --青钉刺 （同倒刺射击）
         aoe_finalSpell = "serpent_sting";
-    elseif ygz.focus >= 30 then
+    elseif ygz.focus >= 55 then
         g.textures[0]:SetColorTexture(0.8, 0.8, 0.8);        --猛禽 （同奥术）
         aoe_finalSpell = "bird_hit";
     elseif ygz.cd_heal_pet <= ygz.cd_gcd and ygz.petPerHealth <= 80 then
