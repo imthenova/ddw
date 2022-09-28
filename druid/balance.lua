@@ -7,7 +7,7 @@ function ydybBalancePlay(ydyb, f, g)
     local debuff_moonlight = mwGetDebuffTime("月火术");
     local cd_jihuo = mwGetCoolDown("激活");
     local cd_item = mwGetItemCoolDown(25634);
-
+    local affectingCombat = UnitAffectingCombat("player");
     if ydyb.now-moontime > 15 then
         ydyb_cast = "愤怒";
     end
@@ -30,7 +30,8 @@ function ydybBalancePlay(ydyb, f, g)
         else
             f.textures[0]:SetColorTexture(0, 0, 1);
         end
-    elseif moon==0 and sun==0 and debuff_moonlight==0 then
+    elseif moon==0 and sun==0 and debuff_moonlight==0 and affectingCombat then
+    --elseif moon==0 and sun==0 and debuff_moonlight==0 then
         f.textures[0]:SetColorTexture(0, 1, 1);
     elseif cd_jihuo<=ydyb.cd_gcd and ydyb.focus<=3000 then
         --激活
