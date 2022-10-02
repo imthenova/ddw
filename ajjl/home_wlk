@@ -1,0 +1,97 @@
+For 10000
+ Rem bjjj
+ FindCenterColor 55, 60, 56, 61, "0000FF",intX,intY //红色斩杀 按键z ->[
+ If intX > 0 And intY > 0 Then
+  //KeyPress "z", 1
+  KeyPress "[", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "000000",intX,intY //黑色致死 按键2 -> ]
+ If intX > 0 And intY > 0 Then
+  //KeyPress "2", 1
+  KeyPress "]", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "00FFFF",intX,intY //黄色怒击 按键3
+ If intX > 0 And intY > 0 Then
+  KeyPress "3", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "FFFF00", intX, intY //青色压制 按键4 -> ;
+ If intX > 0 And intY > 0 Then
+  //KeyPress "4", 1
+  KeyPress ";", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "FF00FF", intX, intY //紫色鲁莽 按键h
+ If intX > 0 And intY > 0 Then
+  KeyPress "h", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "00FF00", intX, intY //猛击 5 ->0
+ If intX > 0 And intY > 0 Then
+  //KeyPress "5", 1
+  KeyPress "0", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "FF0000", intX, intY //蓝色巨龙 按键e ->.
+ If intX > 0 And intY > 0 Then
+  //KeyPress "e", 1
+  KeyPress ".", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "840084", intX, intY //横扫 6
+ If intX > 0 And intY > 0 Then
+  KeyPress "6", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "008484", intX, intY //碎颅打击 c
+ If intX > 0 And intY > 0 Then
+  KeyPress "c", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "DCDCFF", intX, intY //旋风斩 7
+ If intX > 0 And intY > 0 Then
+  KeyPress "7", 1
+  Goto bjjj
+ End If
+  FindCenterColor 55, 60, 56, 61, "DCFFDC", intX, intY //乘胜追击 8
+ If intX > 0 And intY > 0 Then
+  KeyPress "8", 1
+  Goto bjjj
+ End If
+  FindCenterColor 55, 60, 56, 61, "FFDCDC", intX, intY //脏黄色无视痛苦 v
+ If intX > 0 And intY > 0 Then
+  KeyPress "v", 1
+  Goto bjjj
+ End If
+ FindCenterColor 55, 60, 56, 61, "848400", intX, intY //风车 按键` -> ,
+ If intX > 0 And intY > 0 Then
+  //KeyPress "`", 1
+  KeyPress ",", 1
+  Goto bjjj
+ End If
+   FindCenterColor 55, 60, 56, 61, "DCDCDC", intX, intY //乘胜追击 8
+ If intX > 0 And intY > 0 Then
+  KeyPress "=", 1
+  Goto bjjj
+ End If
+    FindCenterColor 55, 60, 56, 61, "515151", intX, intY //乘胜追击 8
+ If intX > 0 And intY > 0 Then
+  KeyPress "F9", 1
+  Goto bjjj
+ End If
+     FindCenterColor 55, 60, 56, 61, "848484", intX, intY //乘胜追击 8
+ If intX > 0 And intY > 0 Then
+  KeyPress "F10", 1
+  Goto bjjj
+ End If
+      FindCenterColor 55, 60, 56, 61, "B2B2B2", intX, intY //乘胜追击 8
+ If intX > 0 And intY > 0 Then
+  KeyPress "F11", 1
+  Goto bjjj
+ End If
+Delay int(Rnd()*100+50)
+Next
+
+FindColor 0,0,1024,768,"0000FF",intX,intY
