@@ -28,10 +28,13 @@ local function YdybDPSCommands()
 		ydyb.pHealth = UnitHealth("player");
 		ydyb.pMaxHealth = UnitHealthMax("player");
 		ydyb.pPerHealth = ceil(100 * ydyb.pHealth / ydyb.pMaxHealth);
+		local talent = select(9,GetTalentInfo(2,3))
 		--play
-		--if ydyb.currentSpecName == "平衡" then
+		if talent <=0 then
 			ydybBalancePlay(ydyb,f,g);
-		--end
+        else
+		    ydybFeralPlay(ydyb,f,g);
+		end
 
 		
 	end
@@ -61,7 +64,7 @@ do
 	local tex = f:CreateTexture()
 	f.textures[0]=tex
 	tex:SetAllPoints(f)
-	tex:SetColorTexture(1, 0, 0)
+	tex:SetColorTexture(0.5, 0.5, 0.5)
 	f:Show()
 
 
@@ -76,7 +79,7 @@ do
 	local tex = g:CreateTexture()
 	g.textures[0]=tex
 	tex:SetAllPoints(g)
-	tex:SetColorTexture(1, 0, 0)
+	tex:SetColorTexture(0.5, 0.5, 0.5)
 	g:Show()
 
 
@@ -90,7 +93,7 @@ do
 	local tex = h:CreateTexture()
 	h.textures[0]=tex
 	tex:SetAllPoints(h)
-	tex:SetColorTexture(1,0,0)
+	tex:SetColorTexture(0.5, 0.5, 0.5)
 	h:Show()
 
 end
