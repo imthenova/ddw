@@ -42,11 +42,11 @@ function ydybFeralPlay(ydyb, f, g)
                 f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
             end
         end
-    elseif buff_yemanpaoxiao <= 10 and comboPoint >= 5 then
+    elseif buff_yemanpaoxiao <= 20 and comboPoint >= 5 then
         if energy>90 then
             f.textures[0]:SetColorTexture(1, 0, 1); --野蛮咆哮
         else
-            if debuff_xielve <= 0 then
+            if debuff_xielve <= 0 and buff_yemanpaoxiao>10 and debuff_gelie>10 then
                 f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
             else
                 f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
