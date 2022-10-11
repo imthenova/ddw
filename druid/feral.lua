@@ -9,8 +9,19 @@ function ydybFeralPlay(ydyb, f, g)
     local buff_kuangbao = mwGetBuffTime("狂暴");
     local buff_jienengshifa = mwGetBuffTime("节能施法");
     local cd_item = mwGetItemCoolDown(37873);
+    local cd_kuangbao = mwGetCoolDown("狂暴");
+    local cd_menghu = mwGetCoolDown("猛虎之怒");
     --single
-    if debuff_lieshangbao <= 4 then
+
+    if isYgzAuto and cd_menghu>10 and energy>80 and cd_kuangbao<=ydyb.cd_gcd and (buff_yemanpaoxiao<10 or debuff_gelie<10 or comboPoint<=2) then
+        --狂暴
+        f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8
+    elseif isYgzAuto and cd_menghu<=ydyb.cd_gcd and (energy>20 or cd_kuangbao>ydyb.cd_gcd+1) and energy<35
+    --        and (buff_yemanpaoxiao<10 or debuff_gelie<10 or comboPoint<=2)
+    then
+        --猛虎
+        f.textures[0]:SetColorTexture(0.8, 0.8, 0.8); --=
+    elseif debuff_lieshangbao <= 4 then
         f.textures[0]:SetColorTexture(1, 1, 0); --3 裂伤
     elseif buff_jienengshifa>0.1 and comboPoint < 5 then
         f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
