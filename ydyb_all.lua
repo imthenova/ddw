@@ -93,7 +93,7 @@ do
 	local tex = h:CreateTexture()
 	h.textures[0]=tex
 	tex:SetAllPoints(h)
-	tex:SetColorTexture(0.5, 0.5, 0.5)
+	tex:SetColorTexture(1, 0.8, 0.8)
 	h:Show()
 
 end
