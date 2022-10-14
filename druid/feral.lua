@@ -5,7 +5,6 @@ function ydybFeralPlay(ydyb, f, g)
     local comboPoint = GetComboPoints("player", "target");
     local debuff_lieshangbao = mwGetDebuffTime("裂伤（豹）");
     local debuff_lieshangxiong = mwGetDebuffTime("裂伤（熊）");
-    local cd_lieshangxiong = mwGetCoolDown("裂伤（熊）");
     local debuff_chuangshang = mwGetDebuffTime("创伤");
     local debuff_xielve = mwGetDebuffTime("斜掠");
     local debuff_gelie = mwGetDebuffTime("割裂");
@@ -28,16 +27,15 @@ function ydybFeralPlay(ydyb, f, g)
         if isYgzAuto and cd_menghu>10 and energy>80 and cd_kuangbao<=ydyb.cd_gcd and (buff_yemanpaoxiao<10 or debuff_gelie<10 or comboPoint<=2) then
             --狂暴
             f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8
-        elseif isYgzAuto and cd_menghu<=ydyb.cd_gcd and (energy>20 or cd_kuangbao>ydyb.cd_gcd+1) and energy<35
+        elseif isYgzAuto and cd_menghu<=0.5 and (energy>20 or cd_kuangbao>ydyb.cd_gcd+1) and energy<35
         --        and (buff_yemanpaoxiao<10 or debuff_gelie<10 or comboPoint<=2)
         then
-            --猛虎
-            f.textures[0]:SetColorTexture(0.8, 0.8, 0.8); --=
+            f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎
         elseif debuff_lieshangbao <= 0 and debuff_chuangshang<=0 and debuff_lieshangxiong<=0 then
             f.textures[0]:SetColorTexture(1, 1, 0); --3 裂伤
         elseif buff_jienengshifa>0.1 and comboPoint < 5 then
             f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
-        elseif energy<30 and buff_kuangbao<=0.1 then
+        elseif energy<30 and buff_kuangbao<=0.1 and (comboPoint>=5 and debuff_gelie<=ydyb.cd_gcd+1.5)==false then
             f.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
         elseif comboPoint <= 0 then
             if energy >= 40 then
@@ -54,7 +52,13 @@ function ydybFeralPlay(ydyb, f, g)
             f.textures[0]:SetColorTexture(1, 0, 1); --野蛮咆哮
             --CP>=1
         elseif debuff_gelie <= 4 then
-            if comboPoint < 5 or energy>95 then
+            if comboPoint < 5  then
+                if debuff_xielve <= 0 then
+                    f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
+                else
+                    f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
+                end
+            elseif energy>95 and debuff_gelie>1 then
                 if debuff_xielve <= 0 then
                     f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
                 else
@@ -73,7 +77,7 @@ function ydybFeralPlay(ydyb, f, g)
             else
                 if debuff_xielve <= 0 and buff_yemanpaoxiao>10 and debuff_gelie>10 then
                     f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
-                elseif energy<45 then
+                elseif energy<45 and (comboPoint>=5 and debuff_gelie<=ydyb.cd_gcd+1.5)==false then
                     f.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
                 else
                     f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
@@ -98,9 +102,9 @@ function ydybFeralPlay(ydyb, f, g)
             f.textures[0]:SetColorTexture(1, 0.8, 0.8)
         elseif cd_jinu<=ydyb.cd_gcd then
             f.textures[0]:SetColorTexture(1, 0, 1); --野蛮咆哮
-        elseif buff_jinu>2 and IsCurrentSpell("重殴")==false and rage>25 then
+        elseif buff_jinu>2 and IsCurrentSpell("重殴")==false and rage>30 then
             f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8
-        elseif IsCurrentSpell("重殴")==false and rage>45 then
+        elseif IsCurrentSpell("重殴")==false and rage>50 then
             f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8
         elseif debuff_count_geshang<5 or debuff_geshang<8 or energy>70 then
             f.textures[0]:SetColorTexture(0, 1, 1);
@@ -109,4 +113,22 @@ function ydybFeralPlay(ydyb, f, g)
         end
     end
 
+    --aoe
+    if nStance==3 then
+        if energy<40 and cd_menghu<=0.5 then
+            g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎
+        elseif energy>40 or buff_jienengshifa > 0.5 then
+            g.textures[0]:SetColorTexture(0.8, 0.8, 0.8); -- = 横扫
+        else
+            g.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
+        end
+    elseif nStance==1 then
+        if buff_jienengshifa > 1.5 or energy>86 then
+            g.textures[0]:SetColorTexture(1, 0.8, 0.8)
+        elseif cd_jinu<=ydyb.cd_gcd and rage <15 then
+            f.textures[0]:SetColorTexture(1, 0, 1); --激怒
+        else
+            g.textures[0]:SetColorTexture(0.8, 0.8, 0.8); -- = 横扫
+        end
+    end
 end

@@ -46,8 +46,8 @@ do
 
 	f = CreateFrame("Frame",nil,UIParent)
 	f:SetFrameStrata("BACKGROUND")
-	f:SetWidth(40) -- Set these to whatever height/width is needed 
-	f:SetHeight(40) -- for your Texture
+	f:SetWidth(1) -- Set these to whatever height/width is needed
+	f:SetHeight(1) -- for your Texture
 	f:SetPoint("CENTER",-730,380)
 	--f:SetPoint("CENTER",-100,100)
 
@@ -70,8 +70,8 @@ do
 
 	g = CreateFrame("Frame",nil,UIParent)
 	g:SetFrameStrata("BACKGROUND")
-	g:SetWidth(40) -- Set these to whatever height/width is needed 
-	g:SetHeight(40) -- for your Texture
+	g:SetWidth(1) -- Set these to whatever height/width is needed
+	g:SetHeight(1) -- for your Texture
 	g:SetPoint("CENTER",-580,330)
 	g.textures = {}
 
@@ -86,14 +86,14 @@ do
 	
 	h = CreateFrame("Frame",nil,UIParent)
 	h:SetFrameStrata("BACKGROUND")
-	h:SetWidth(60) -- Set these to whatever height/width is needed 
-	h:SetHeight(60) -- for your Texture
-	h:SetPoint("CENTER",-250,100)
+	h:SetWidth(50) -- Set these to whatever height/width is needed
+	h:SetHeight(50) -- for your Texture
+	h:SetPoint("CENTER",-250,-50)
 	h.textures = {}
 	local tex = h:CreateTexture()
 	h.textures[0]=tex
 	tex:SetAllPoints(h)
-	tex:SetColorTexture(1, 0.8, 0.8)
+	tex:SetColorTexture(1, 0.2, 0.2)
 	h:Show()
 
 end
