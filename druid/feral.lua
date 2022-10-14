@@ -20,7 +20,7 @@ function ydybFeralPlay(ydyb, f, g)
     --        and (buff_yemanpaoxiao<10 or debuff_gelie<10 or comboPoint<=2)
     then
         --猛虎
-        f.textures[0]:SetColorTexture(0.8, 0.8, 0.8); --=
+        f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎
     elseif debuff_lieshangbao <= 4 then
         f.textures[0]:SetColorTexture(1, 1, 0); --3 裂伤
     elseif buff_jienengshifa>0.1 and comboPoint < 5 then
