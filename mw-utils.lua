@@ -24,6 +24,16 @@ function mwGetDebuffTime(spellName)
 	return debuffTime;
 end
 
+function mwGetPlayerDebuffTime(spellName)
+	local expirationTime_buff = select(6,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));--debuff
+	local isPlayer = select(7,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));
+	local debuffTime=0; --debuff持续时间
+	if (expirationTime_buff ~=nil and expirationTime_buff ~=0 and isPlayer=="player") then
+		debuffTime = expirationTime_buff - GetTime();
+	end
+	return debuffTime;
+end
+
 function mwGetDebuffCount(spellName)
 	local count = select(3,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));--debuff
 	local debuffCount=0; --debuff持续时间
@@ -32,6 +42,16 @@ function mwGetDebuffCount(spellName)
 	end
 	return debuffCount;
 end
+function mwGetPlayerDebuffCount(spellName)
+	local count = select(3,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));--debuff
+	local isPlayer = select(7,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));
+	local debuffCount=0; --debuff持续时间
+	if (count ~=nil and count ~=0 and isPlayer=="player") then
+		debuffCount = count;
+	end
+	return debuffCount;
+end
+
 
 function mwGetTargetBuff(spellName)
 	local expirationTime_buff = select(6,AuraUtil.FindAuraByName(spellName,"target"));--debuff

@@ -6,10 +6,10 @@ function ydybFeralPlay(ydyb, f, g)
     local debuff_lieshangbao = mwGetDebuffTime("裂伤（豹）");
     local debuff_lieshangxiong = mwGetDebuffTime("裂伤（熊）");
     local debuff_chuangshang = mwGetDebuffTime("创伤");
-    local debuff_xielve = mwGetDebuffTime("斜掠");
-    local debuff_gelie = mwGetDebuffTime("割裂");
-    local debuff_geshang = mwGetDebuffTime("割伤");
-    local debuff_count_geshang = mwGetDebuffCount("割伤");
+    local debuff_xielve = mwGetPlayerDebuffTime("斜掠");
+    local debuff_gelie = mwGetPlayerDebuffTime("割裂");
+    local debuff_geshang = mwGetPlayerDebuffTime("割伤");
+    local debuff_count_geshang = mwGetPlayerDebuffCount("割伤");
     local buff_yemanpaoxiao = mwGetBuffTime("野蛮咆哮");
     local buff_kuangbao = mwGetBuffTime("狂暴");
     local buff_jienengshifa = mwGetBuffTime("节能施法");
