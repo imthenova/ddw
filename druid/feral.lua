@@ -22,7 +22,8 @@ function ydybFeralPlay(ydyb, f, g)
     if isYgzAuto and cd_menghu>10 and energy>80 and cd_kuangbao<=ydyb.cd_gcd and (buff_yemanpaoxiao<10 or debuff_gelie<10 or comboPoint<=2) then
         --狂暴
         f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8
-    elseif isYgzAuto and cd_menghu<=0.5 and (energy>20 or cd_kuangbao>ydyb.cd_gcd+1) and energy<35 and (buff_yemanpaoxiao<10 or debuff_gelie<10)
+    elseif isYgzAuto and cd_menghu<=0.5 and (energy>20 or cd_kuangbao>ydyb.cd_gcd+1) and energy<35
+            --and (buff_yemanpaoxiao<10 or debuff_gelie<10)
     --        and (buff_yemanpaoxiao<10 or debuff_gelie<10 or comboPoint<=2)
     then
         --猛虎
@@ -30,24 +31,22 @@ function ydybFeralPlay(ydyb, f, g)
     elseif debuff_lieshangbao <= 4 and debuff_chuangshang<=0 and debuff_lieshangxiong<=0 then
         f.textures[0]:SetColorTexture(1, 1, 0); --3 裂伤
     elseif buff_jienengshifa>0.1 and (comboPoint < 5 or (debuff_gelie>10 and buff_yemanpaoxiao>10)) then
-        f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
-    elseif comboPoint <= 0 then
-        if energy >= 40 then
-            if debuff_xielve <= 0 then
-                f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
-            else
-                f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
-            end
+        if debuff_xielve <= 0 then
+            f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
         else
-            --变熊
-            f.textures[0]:SetColorTexture(0.5, 0.5, 0.5)
+            f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
+        end
+    elseif comboPoint <= 0 then
+        if debuff_xielve <= 0 then
+            f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
+        else
+            f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
         end
     elseif buff_yemanpaoxiao <= 0.5 then
         f.textures[0]:SetColorTexture(1, 0, 1); --野蛮咆哮
         --CP>=1
-    --elseif (debuff_gelie>12 and buff_yemanpaoxiao>15 and comboPoint>=5) or
-    --        (debuff_gelie>10 and buff_yemanpaoxiao>15 and comboPoint>=5 and cd_menghu<10) or (ydyb.tHealth<100000 and comboPoint>=5) then
-    --    f.textures[0]:SetColorTexture(0.6, 0.6, 0.6); --f11 凶猛撕咬
+    elseif (debuff_gelie>=15 and buff_yemanpaoxiao>=15 and comboPoint>=5 and (cd_menghu<10 or buff_kuangbao>1)) or (ydyb.tHealth<100000 and comboPoint>=5) then
+        f.textures[0]:SetColorTexture(0.6, 0.6, 0.6); --f11 凶猛撕咬
     elseif debuff_gelie <= 4 then
         if comboPoint < 5  then
             if debuff_xielve <= 0 then

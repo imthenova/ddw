@@ -40,6 +40,45 @@ local function YdybDPSCommands()
 	end
 end
 
+
+local function ScwDPSCommands()
+	if isYgzAuto then
+		h:Show();
+	else
+		h:Hide();
+	end
+	if UnitCanAttack("player","target") then
+		--Init data
+		local scw = {};
+		--utils
+		scw.now = GetTime();
+		scw.cd_gcd=mwGetCoolDown("野性印记"); --gcd
+		--Spec
+		--scw.currentSpec = GetSpecialization();
+		--scw.currentSpecName = scw.currentSpec and select(2, GetSpecializationInfo(scw.currentSpec)) or "None";
+		--target
+		scw.tHealth = UnitHealth("target");
+		scw.tMaxHealth = UnitHealthMax("target");
+		scw.tPerHealth = ceil(100 * scw.tHealth / scw.tMaxHealth);
+		--target inRange count
+		scw.inRange = 0
+		--player
+		scw.focus=UnitPower("player");
+		scw.pHealth = UnitHealth("player");
+		scw.pMaxHealth = UnitHealthMax("player");
+		scw.pPerHealth = ceil(100 * scw.pHealth / scw.pMaxHealth);
+		local talent = select(9,GetTalentInfo(2,3))
+		--play
+		if talent <=0 then
+			scwArmsPlay(scw,f,g);
+		else
+			scwFuryPlay(scw,f,g);
+		end
+
+
+	end
+end
+
 do
 
 	local playerName, realm = UnitName("player")
@@ -57,6 +96,10 @@ do
 	if playerName == "野德一逼" then
 		f:SetScript("OnUpdate", function()
 			YdybDPSCommands()
+		end)
+	elseif playerName == "酥粗威" then
+		f:SetScript("OnUpdate", function()
+			ScwDPSCommands()
 		end)
 	end
 
