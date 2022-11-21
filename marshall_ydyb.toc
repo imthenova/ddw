@@ -7,3 +7,4 @@ druid/balance.lua
 druid/feral.lua
 warriors/wlk_arms.lua
 warriors/wlk_fury.lua
+dk/frost.lua

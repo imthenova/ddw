@@ -79,6 +79,40 @@ local function ScwDPSCommands()
 	end
 end
 
+local function p940DPSCommands()
+	--if isYgzAuto then
+	--	h:Show();
+	--else
+		h:Hide();
+	--end
+	if UnitCanAttack("player","target") then
+		--Init data
+		local p940 = {};
+		--utils
+		p940.now = GetTime();
+		p940.cd_gcd=mwGetCoolDown("凋零缠绕"); --gcd
+		--Spec
+		--p940.currentSpec = GetSpecialization();
+		--p940.currentSpecName = p940.currentSpec and select(2, GetSpecializationInfo(p940.currentSpec)) or "None";
+		--target
+		p940.tHealth = UnitHealth("target");
+		p940.tMaxHealth = UnitHealthMax("target");
+		p940.tPerHealth = ceil(100 * p940.tHealth / p940.tMaxHealth);
+		--target inRange count
+		p940.inRange = 0
+		--player
+		p940.energy=UnitPower("player");
+		p940.pHealth = UnitHealth("player");
+		p940.pMaxHealth = UnitHealthMax("player");
+		p940.pPerHealth = ceil(100 * p940.pHealth / p940.pMaxHealth);
+		local talent = select(9,GetTalentInfo(2,3))
+		--play
+		p940FrostPlay(p940,f,g);
+
+
+	end
+end
+
 do
 
 	local playerName, realm = UnitName("player")
@@ -100,6 +134,10 @@ do
 	elseif playerName == "酥粗威" then
 		f:SetScript("OnUpdate", function()
 			ScwDPSCommands()
+		end)
+	elseif playerName == "玩家九四零" then
+		f:SetScript("OnUpdate", function()
+			p940DPSCommands()
 		end)
 	end
 
@@ -136,7 +174,7 @@ do
 	local tex = h:CreateTexture()
 	h.textures[0]=tex
 	tex:SetAllPoints(h)
-	tex:SetColorTexture(0.8, 0, 0)
+	tex:SetColorTexture(0.6, 0.6, 0.6)
 	h:Show()
 
 end

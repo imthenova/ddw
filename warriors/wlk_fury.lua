@@ -18,10 +18,13 @@ function scwFuryPlay(scw, f, g)
         f.textures[0]:SetColorTexture(1, 0, 1);
         g.textures[0]:SetColorTexture(1, 0, 1);
     elseif IsCurrentSpell("英勇打击") == false and IsCurrentSpell("顺劈斩") == false and
-            (rage >= 68 or (rage>=48 and buff_deathwish>=1)) then
+            (rage >= 60 or (rage>=48 and buff_deathwish>=1)) then
         f.textures[0]:SetColorTexture(1, 0.8, 0.8); --7 英勇
-        g.textures[0]:SetColorTexture(1, 0.8, 0.8); --7 英勇
-    elseif scw.tMaxHealth > 1000000 and scw.tHealth > 1000000 and rage >= 15 and debuff_pojia <= 4 then
+        g.textures[0]:SetColorTexture(0, 0.4, 0.4); --, 顺劈
+    elseif IsCurrentSpell("英勇打击") == true and (rage < 50 or (rage<=40 and buff_deathwish>=1)) then
+        f.textures[0]:SetColorTexture(0.6, 0.6, 0.6); --7 英勇
+        g.textures[0]:SetColorTexture(0.6, 0.6, 0.6); --7 英勇
+    elseif scw.tMaxHealth > 1500000 and scw.tHealth > 200000 and rage >= 15 and debuff_pojia <= 4 then
         f.textures[0]:SetColorTexture(0, 1, 1); -- ; 破甲
         g.textures[0]:SetColorTexture(0, 1, 1); -- ; 破甲
     elseif usable_cszj then
@@ -31,12 +34,17 @@ function scwFuryPlay(scw, f, g)
         f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 猛击
         g.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 猛击
     elseif cd_sx <= scw.cd_gcd and rage >= 20 then
-        f.textures[0]:SetColorTexture(0, 0, 0); -- 黑色嗜血
-        g.textures[0]:SetColorTexture(0, 0, 0); -- 黑色嗜血
+        if isYgzAuto then
+            f.textures[0]:SetColorTexture(0.4, 0.4, 0.4); -- 黑色嗜血
+            g.textures[0]:SetColorTexture(0.4, 0.4, 0.4); -- 黑色嗜血
+        else
+            f.textures[0]:SetColorTexture(0, 0, 0); -- 黑色嗜血
+            g.textures[0]:SetColorTexture(0, 0, 0); -- 黑色嗜血
+        end
     elseif cd_xuanfengzhan <= scw.cd_gcd and rage >= 25 then
         f.textures[0]:SetColorTexture(0, 1, 0); -- 旋风斩
         g.textures[0]:SetColorTexture(0, 1, 0); -- 旋风斩
-    elseif scw.tMaxHealth > 1000000 and scw.tHealth > 1000000 and rage >= 15 and (debuff_count_pojia < 5 or debuff_pojia <= 5.8) then
+    elseif scw.tMaxHealth > 1500000 and scw.tHealth > 200000 and rage >= 15 and (debuff_count_pojia < 5 or debuff_pojia <= 5.8) then
         f.textures[0]:SetColorTexture(0, 1, 1); -- ; 破甲
         g.textures[0]:SetColorTexture(0, 1, 1); -- ; 破甲
     elseif scw.tPerHealth <= 20 and rage >= 40 then
@@ -50,5 +58,9 @@ function scwFuryPlay(scw, f, g)
         g.textures[0]:SetColorTexture(0.5, 0.5, 0.5);
     end
 
+
+    if cd_xuanfengzhan <= scw.cd_gcd and rage >= 25 then
+        g.textures[0]:SetColorTexture(0, 1, 0); -- 旋风斩
+    end
 
 end
