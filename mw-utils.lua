@@ -6,6 +6,21 @@ function mwGetBuffTime(spellName)
 	end
 	return buffTime;
 end
+function mwGetBuffTimeById(findSpellId)
+	local expirationTime_buff = 0;
+	for i=1,60 do
+		local name, rank, icon, count, debuffType, expirationTime, unitCaster, isStealable, _,spellId =UnitAura("player",i,nil,"HELPFUL");
+		if spellId==findSpellId then
+			expirationTime_buff = expirationTime;
+			break;
+		end
+	end
+	local buffTime=0; --buff持续时间
+	if (expirationTime_buff~=nil and expirationTime_buff~=0) then
+		buffTime= expirationTime_buff - GetTime();
+	end
+	return buffTime;
+end
 function mwGetPetBuffTime(spellName)
 	local expirationTime_buff = select(6,AuraUtil.FindAuraByName(spellName,"pet",'HELPFUL'));--buff
 	local buffTime=0; --buff持续时间

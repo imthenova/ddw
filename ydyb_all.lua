@@ -126,8 +126,7 @@ do
 
 	--f:EnableKeyboard(true)
 	--f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-	
-	if playerName == "野德一逼" then
+	if playerName == "野德一逼" or playerName == "野德威" then
 		f:SetScript("OnUpdate", function()
 			YdybDPSCommands()
 		end)
@@ -135,7 +134,7 @@ do
 		f:SetScript("OnUpdate", function()
 			ScwDPSCommands()
 		end)
-	elseif playerName == "玩家九四零" then
+	elseif playerName == "玩家九四零" or playerName == "迪凯威" then
 		f:SetScript("OnUpdate", function()
 			p940DPSCommands()
 		end)
@@ -176,6 +175,7 @@ do
 	tex:SetAllPoints(h)
 	tex:SetColorTexture(0.6, 0.6, 0.6)
 	h:Show()
+	h:Hide()
 
 end
 
