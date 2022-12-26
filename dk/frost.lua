@@ -32,34 +32,50 @@ function p940FrostPlay(p940, f, g)
     local buff_killing_machine = mwGetBuffTime("杀戮机器");
     local buff_whiteFrost = mwGetBuffTime("冰冻之雾");
     local cd_roar = mwGetCoolDown("寒冬号角");
-    if energy >=130 then
-        f.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
-    elseif buff_roar <= 0 and cd_roar<=p940.cd_gcd then
+    local cd_swdl = mwGetCoolDown("枯萎凋零");
+    local cd_lfcj = mwGetCoolDown("凛风冲击");
+    if buff_roar <= 0 and cd_roar<=p940.cd_gcd then
         f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
+        g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
 --     elseif IsCurrentSpell("符文打击") == false and energy>=20 and usable_overpower then
 --         f.textures[0]:SetColorTexture(1, 1, 0); --3 裂伤
     elseif debuf_frost <=0 and (isFrostReady or death1Ready) then
         f.textures[0]:SetColorTexture(1, 0, 0); --冰触
+        g.textures[0]:SetColorTexture(1, 0, 0); --冰触
     elseif debuf_blood <=0 and (isUnholyReady or death1Ready) then
         f.textures[0]:SetColorTexture(0, 1, 1); --暗打
+        g.textures[0]:SetColorTexture(0, 1, 1); --暗打
 --     elseif (isFrostReady and isUnholyReady or death2Ready) and p940.pPerHealth<=50 then
 --         f.textures[0]:SetColorTexture(1, 0.8, 0.8) --灵打
-    elseif debuf_frost <=3 or debuf_blood <=3 and isBloodReady then
-    --传染
-
+    elseif (debuf_frost <=3 and debuf_frost>0.1 or debuf_blood <=3 and debuf_blood>0.1) and isBloodReady then
+        f.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
+        g.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
     elseif (isFrostReady and isUnholyReady or
         isFrostBothReady and death1Ready or
         isUnholyReady and death1Ready or
         death2Ready) then
         f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 --湮灭
+        g.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 --湮灭
+        if cd_lfcj<=p940.cd_gcd then
+            g.textures[0]:SetColorTexture(1, 1, 0); --3 凛风
+        end
     elseif buff_killing_machine>0.2 and energy>=40 then
         f.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
+        g.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
     elseif buff_whiteFrost>0.2 then
         f.textures[0]:SetColorTexture(1, 1, 0); --3 凛风
+        g.textures[0]:SetColorTexture(1, 1, 0); --3 凛风
+
+    elseif (debuf_frost <=5 and debuf_frost>0.1 or debuf_blood <=5 and debuf_blood>0.1) and isBloodReady then
+        f.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
+        g.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
     elseif energy>=40 then
         f.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
-    elseif isBloodReady or deathReady then
+        g.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
+    elseif (isBloodReady or deathReady) and debuf_frost >=5 and debuf_frost>=5  then
         f.textures[0]:SetColorTexture(0, 0, 0); --血打
+        --g.textures[0]:SetColorTexture(0, 0, 0); --血打
+        g.textures[0]:SetColorTexture(1, 0, 1); --5 血沸
 --     elseif (isFrostReady and isUnholyReady or death2Ready) then
 --         f.textures[0]:SetColorTexture(1, 0.8, 0.8) --灵打
     --elseif isFrostReady then
@@ -67,9 +83,14 @@ function p940FrostPlay(p940, f, g)
     --elseif isUnholyReady then
     --    f.textures[0]:SetColorTexture(0, 1, 1); --暗打
     elseif cd_roar<=p940.cd_gcd then
-       f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
-       g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
+        f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
+        g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
     else
         f.textures[0]:SetColorTexture(0.5, 0.5, 0.5); -- 等着
+        g.textures[0]:SetColorTexture(0.5, 0.5, 0.5); -- 等着
+    end
+
+    if isFrostReady and isUnholyBothReady and (isBloodReady or deathReady) and cd_swdl<=p940.cd_gcd then
+        g.textures[0]:SetColorTexture(0.4, 0.4, 0.4); --f10 取消
     end
 end
