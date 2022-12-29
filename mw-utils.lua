@@ -85,6 +85,14 @@ function mwGetCoolDown(spellName)
 	end
 	return cd;
 end
+function mwGetRuneCoolDown(index)
+	local start,durantion,enable=GetRuneCooldown(index); -- CD
+	local cd=0;
+	if (start~=nil and start~=0) then
+		cd=durantion + start - GetTime();
+	end
+	return cd;
+end
 
 function mwGetItemCoolDown(itemID)
 	local start,durantion,enable=GetItemCooldown(itemID); -- CD
