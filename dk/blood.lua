@@ -1,15 +1,21 @@
 function p940BloodPlay(p940, f, g)
+    local cd_gcd = p940.cd_gcd;
     --buff
     local energy = UnitPower("player");
     local blood1CD = select(3, GetRuneCooldown(1));
-    --/script print(GetRuneType(1));
     local blood2CD = select(3, GetRuneCooldown(2));
+    local blood1GCD = mwGetRuneCoolDown(1)<=cd_gcd;
+    local blood2GCD = mwGetRuneCoolDown(2)<=cd_gcd;
     local frost1CD = select(3, GetRuneCooldown(5));
     local frost2CD = select(3, GetRuneCooldown(6));
+    local frost1GCD = mwGetRuneCoolDown(5)<=cd_gcd;
+    local frost2GCD = mwGetRuneCoolDown(6)<=cd_gcd;
     local unholy1CD = select(3, GetRuneCooldown(3));
     local unholy2CD = select(3, GetRuneCooldown(4));
+    local unholy1GCD = mwGetRuneCoolDown(3)<=cd_gcd;
+    local unholy2GCD = mwGetRuneCoolDown(4)<=cd_gcd;
     local usable_overpower = select(1,IsUsableSpell("符文打击")) or select(2,IsUsableSpell("符文打击"));
-    --/script print(select(2,IsUsableSpell("符文打击")));
+    --/script print(GetRuneCooldown(5));
     --/script print(IsUsableSpell("符文打击"));
     local death1CD = GetRuneType(1) == 4 and blood1CD;
     local death2CD = GetRuneType(2) == 4 and blood2CD;
@@ -22,21 +28,25 @@ function p940BloodPlay(p940, f, g)
     local deathReady = death1CD or death2CD or death3CD or death4CD or death5CD or death6CD;
 
     local isBloodReady = blood1CD or blood2CD;
+    local isBloodGCD = blood1GCD or blood2GCD;
     local isBloodBothReady = blood1CD and blood2CD;
     local isFrostReady = frost1CD or frost2CD;
+    local isFrostGCD = frost1GCD or frost2GCD;
     local isFrostBothReady = frost1CD and frost2CD;
     local isUnholyReady = unholy1CD or unholy2CD;
+    local isUnholyGCD = unholy1GCD or unholy2GCD;
     local isUnholyBothReady = unholy1CD and unholy2CD;
     local debuf_frost = mwGetPlayerDebuffTime("冰霜疫病");
     local debuf_blood = mwGetPlayerDebuffTime("血之疫病");
     local buff_roar = mwGetBuffTime("寒冬号角");
+    local buff_strongtt = mwGetBuffTime("大地之力");
     local buff_killing_machine = mwGetBuffTime("杀戮机器");
     local buff_whiteFrost = mwGetBuffTime("冰冻之雾");
     local cd_roar = mwGetCoolDown("寒冬号角");
     local cd_swdl = mwGetCoolDown("枯萎凋零");
     local cd_lfcj = mwGetCoolDown("凛风冲击");
     --print(usable_overpower);
-    if buff_roar <= 0 and cd_roar <= p940.cd_gcd then
+    if buff_roar <= 0 and buff_strongtt<=0 and cd_roar<=cd_gcd then
         f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
         g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
     elseif IsCurrentSpell("符文打击") == false and energy >= 20 and usable_overpower then
@@ -77,7 +87,7 @@ function p940BloodPlay(p940, f, g)
     elseif energy >= 40 then
         f.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
         g.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
-    elseif cd_roar <= p940.cd_gcd then
+    elseif cd_roar <= cd_gcd then
         f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
         g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
     else
@@ -85,7 +95,7 @@ function p940BloodPlay(p940, f, g)
         g.textures[0]:SetColorTexture(0.5, 0.5, 0.5); -- 等着
     end
 
-    if isFrostReady and isUnholyBothReady and (isBloodReady or deathReady) and cd_swdl <= p940.cd_gcd then
+    if isFrostReady and isUnholyBothReady and (isBloodReady or deathReady) and cd_swdl <= cd_gcd then
         g.textures[0]:SetColorTexture(0.4, 0.4, 0.4); --f10 取消
     end
 end

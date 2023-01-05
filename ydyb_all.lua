@@ -107,8 +107,8 @@ local function p940DPSCommands()
 		p940.pPerHealth = ceil(100 * p940.pHealth / p940.pMaxHealth);
 		local talent = select(9,GetTalentInfo(2,3))
 		--play
-		--p940FrostPlay(p940,f,g);
-		p940BloodPlay(p940,f,g);
+		p940FrostPlay(p940,f,g);
+		--p940BloodPlay(p940,f,g);
 
 	end
 end
