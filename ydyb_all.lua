@@ -108,6 +108,7 @@ local function p940DPSCommands()
 		local talent = select(9,GetTalentInfo(2,3))
 		--play
 		p940FrostPlay(p940,f,g);
+		--p940FrostPlayHDR(p940,f,g);
 		--p940BloodPlay(p940,f,g);
 
 	end
@@ -134,7 +135,7 @@ do
 		f:SetScript("OnUpdate", function()
 			ScwDPSCommands()
 		end)
-	elseif playerName == "玩家九四零" or playerName == "迪凯威" then
+	elseif playerName == "玩家九四零" or playerName == "迪凯威" or playerName == "迪凯威威" then
 		f:SetScript("OnUpdate", function()
 			p940DPSCommands()
 		end)
@@ -144,7 +145,7 @@ do
 	local tex = f:CreateTexture()
 	f.textures[0]=tex
 	tex:SetAllPoints(f)
-	tex:SetColorTexture(0.5, 0.5, 0.5)
+	tex:SetColorTexture(0.8, 1, 0.8)
 	f:Show()
 
 
@@ -173,7 +174,7 @@ do
 	local tex = h:CreateTexture()
 	h.textures[0]=tex
 	tex:SetAllPoints(h)
-	tex:SetColorTexture(0.6, 0.6, 0.6)
+	tex:SetColorTexture(0.2, 0.2, 0.2)
 	h:Show()
 	h:Hide()
 

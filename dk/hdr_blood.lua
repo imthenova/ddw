@@ -58,10 +58,10 @@ function p940BloodPlay(p940, f, g)
         f.textures[0]:SetColorTexture(0, 1, 1); --暗打
         g.textures[0]:SetColorTexture(0, 1, 1); --暗打
         --     elseif (isFrostReady and isUnholyReady or death2Ready) and p940.pPerHealth<=50 then
-        --         f.textures[0]:SetColorTexture(1, 0.8, 0.8) --灵打
+        --         f.textures[0]:SetColorTexture(1, 0.4, 0.4) --灵打
     elseif (debuf_frost <= 3 and debuf_frost > 0.1 or debuf_blood <= 3 and debuf_blood > 0.1) and isBloodReady then
-        f.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
-        g.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
+        f.textures[0]:SetColorTexture(1, 0.4, 0.4) --8传染
+        g.textures[0]:SetColorTexture(1, 0.4, 0.4) --8传染
     elseif (isFrostReady or death1Ready) and p940.pPerHealth > 40 then
         f.textures[0]:SetColorTexture(1, 0, 0); --冰触
         g.textures[0]:SetColorTexture(1, 0, 0); --冰触
@@ -72,14 +72,14 @@ function p940BloodPlay(p940, f, g)
         f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 --灵打
         g.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 --灵打
     elseif (debuf_frost <= 5 and debuf_frost > 0.1 or debuf_blood <= 5 and debuf_blood > 0.1) and isBloodReady then
-        f.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
-        g.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
+        f.textures[0]:SetColorTexture(1, 0.4, 0.4) --8传染
+        g.textures[0]:SetColorTexture(1, 0.4, 0.4) --8传染
     elseif (isBloodReady or deathReady) and debuf_frost >= 5 and debuf_frost >= 5 then
         f.textures[0]:SetColorTexture(0, 0, 0); --血打
         --g.textures[0]:SetColorTexture(0, 0, 0); --血打
         g.textures[0]:SetColorTexture(1, 0, 1); --5 血沸
         --     elseif (isFrostReady and isUnholyReady or death2Ready) then
-        --         f.textures[0]:SetColorTexture(1, 0.8, 0.8) --灵打
+        --         f.textures[0]:SetColorTexture(1, 0.4, 0.4) --灵打
         --elseif isFrostReady then
         --    f.textures[0]:SetColorTexture(1, 0, 0); --冰触
         --elseif isUnholyReady then
