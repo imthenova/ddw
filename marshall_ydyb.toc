@@ -10,3 +10,4 @@ warriors/wlk_fury.lua
 dk/frost.lua
 dk/blood.lua
 dk/hdr_frost.lua
+dk/hdr_blood.lua

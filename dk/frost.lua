@@ -1,5 +1,6 @@
 function p940FrostPlay(p940, f, g)
     local cd_gcd = p940.cd_gcd;
+    local color08 = "0.8";
     --buff
     local energy = UnitPower("player");
     local blood1CD = select(3,GetRuneCooldown(1));
@@ -60,7 +61,7 @@ function p940FrostPlay(p940, f, g)
     local cd_swdl = mwGetCoolDown("枯萎凋零");
     local cd_lfcj = mwGetCoolDown("凛风冲击");
     local min_debuff = min(debuf_frost,debuf_blood);
-    local can_spread = cd_bloodRune1<min_debuff-3.5 and cd_bloodRune2<min_debuff-3.5;
+    local can_spread = cd_bloodRune1<min_debuff-4.9 and cd_bloodRune2<min_debuff-4.9;
     if buff_roar <= 0 and buff_strongtt<=0 and cd_roar<=cd_gcd then
         f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
         g.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎 战吼
@@ -70,14 +71,14 @@ function p940FrostPlay(p940, f, g)
     elseif debuf_blood <=0 and (isUnholyGCD or death1Ready) then
         f.textures[0]:SetColorTexture(0, 1, 1); --暗打
         g.textures[0]:SetColorTexture(0, 1, 1); --暗打
-    elseif (min_debuff <=4.2 and min_debuff>0.1) and isBloodGCD then
-        f.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
-        g.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
+    elseif (min_debuff <=4.9 and min_debuff>0.1) and isBloodGCD then
+        f.textures[0]:SetColorTexture(1, color08, color08) --8传染
+        g.textures[0]:SetColorTexture(1, color08, color08) --8传染
     elseif (isFrostGCD and isUnholyGCD
             --or deathBothGCD and min_debuff>11
     ) then
-        f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 --湮灭
-        g.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 --湮灭
+        f.textures[0]:SetColorTexture(color08, 1, color08); --8 --湮灭
+        g.textures[0]:SetColorTexture(color08, 1, color08); --8 --湮灭
         if cd_lfcj<=p940.cd_gcd then
             g.textures[0]:SetColorTexture(1, 1, 0); --3 凛风
         end
@@ -87,22 +88,22 @@ function p940FrostPlay(p940, f, g)
     elseif buff_whiteFrost>0.2 then
         f.textures[0]:SetColorTexture(1, 1, 0); --3 凛风
         g.textures[0]:SetColorTexture(1, 1, 0); --3 凛风
-    elseif energy>=90 then
+    elseif energy>=80 then
         f.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
         g.textures[0]:SetColorTexture(0, 0, 1); --缠绕 冰打
     elseif (isFrostNext and isUnholyNext
             --or deathBothGCD and min_debuff>11
     )then
-        f.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 --湮灭
-        g.textures[0]:SetColorTexture(0.8, 1, 0.8); --8 --湮灭
+        f.textures[0]:SetColorTexture(color08, 1, color08); --8 --湮灭
+        g.textures[0]:SetColorTexture(color08, 1, color08); --8 --湮灭
         if cd_lfcj<=p940.cd_gcd then
             g.textures[0]:SetColorTexture(1, 1, 0); --3 凛风
         end
     elseif (can_spread==false and min_debuff>0.2) and isBloodGCD
         --and min_debuff<12
     then
-        f.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
-        g.textures[0]:SetColorTexture(1, 0.8, 0.8) --8传染
+        f.textures[0]:SetColorTexture(1, color08, color08) --8传染
+        g.textures[0]:SetColorTexture(1, color08, color08) --8传染
     --elseif (isBloodGCD or deathReady) and min_debuff>=5 and can_spread  then
     elseif (isBloodGCD or deathReady) and can_spread
         --and min_debuff<12

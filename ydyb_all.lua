@@ -105,11 +105,17 @@ local function p940DPSCommands()
 		p940.pHealth = UnitHealth("player");
 		p940.pMaxHealth = UnitHealthMax("player");
 		p940.pPerHealth = ceil(100 * p940.pHealth / p940.pMaxHealth);
-		local talent = select(9,GetTalentInfo(2,3))
+		local talent = select(9,GetTalentInfo(2,29)) --萨萨里安的威胁
 		--play
-		p940FrostPlay(p940,f,g);
-		--p940FrostPlayHDR(p940,f,g);
-		--p940BloodPlay(p940,f,g);
+		if talent>0 then
+			p940FrostPlay(p940,f,g);
+			--p940FrostPlayHDR(p940,f,g);
+		else
+			p940BloodPlay(p940,f,g);
+			--p940BloodPlayHDR(p940,f,g);
+		end
+
+
 
 	end
 end
