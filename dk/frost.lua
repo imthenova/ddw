@@ -60,6 +60,8 @@ function p940FrostPlay(p940, f, g)
     local cd_roar = mwGetCoolDown("寒冬号角");
     local cd_swdl = mwGetCoolDown("枯萎凋零");
     local cd_lfcj = mwGetCoolDown("凛风冲击");
+    local cd_fenliu = mwGetCoolDown("活力分流");
+    local cd_tongqiang = mwGetCoolDown("铜墙铁壁");
     local min_debuff = min(debuf_frost,debuf_blood);
     local can_spread = cd_bloodRune1<min_debuff-4.9 and cd_bloodRune2<min_debuff-4.9;
     if buff_roar <= 0 and buff_strongtt<=0 and cd_roar<=cd_gcd then
@@ -71,11 +73,19 @@ function p940FrostPlay(p940, f, g)
     elseif debuf_blood <=0 and (isUnholyGCD or death1Ready) then
         f.textures[0]:SetColorTexture(0, 1, 1); --暗打
         g.textures[0]:SetColorTexture(0, 1, 1); --暗打
-    elseif (min_debuff <=4.9 and min_debuff>0.1) and isBloodGCD then
-        f.textures[0]:SetColorTexture(1, color08, color08) --8传染
-        g.textures[0]:SetColorTexture(1, color08, color08) --8传染
+    elseif (isFrostReady==false and death1Ready and cd_fenliu<=0 and cd_tongqiang<=0) then
+        f.textures[0]:SetColorTexture(0.4, 0.4, 0.4); --铜墙铁壁 f10
+        g.textures[0]:SetColorTexture(0.4, 0.4, 0.4); --铜墙铁壁 f10
+    elseif (min_debuff <=4.9 and min_debuff>0.1) and (isBloodGCD or cd_fenliu<=0) then
+        if cd_fenliu<=0 then
+            f.textures[0]:SetColorTexture(0.6, 0.6, 0.6); --分流传染宏 F11
+            g.textures[0]:SetColorTexture(0.6, 0.6, 0.6); --分流传染宏 F11
+        else
+            f.textures[0]:SetColorTexture(1, color08, color08) --8传染
+            g.textures[0]:SetColorTexture(1, color08, color08) --8传染
+        end
     elseif (isFrostGCD and isUnholyGCD
-            --or deathBothGCD and min_debuff>11
+            or (deathBothGCD and cd_fenliu<=0)-- and min_debuff>11
     ) then
         f.textures[0]:SetColorTexture(color08, 1, color08); --8 --湮灭
         g.textures[0]:SetColorTexture(color08, 1, color08); --8 --湮灭
