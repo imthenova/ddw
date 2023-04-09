@@ -80,11 +80,11 @@ local function ScwDPSCommands()
 end
 
 local function p940DPSCommands()
-	--if isYgzAuto then
-	--	h:Show();
-	--else
+	if isYgzAuto then
+		h:Show();
+	else
 		h:Hide();
-	--end
+	end
 	if UnitCanAttack("player","target") then
 		--Init data
 		local p940 = {};
@@ -133,7 +133,7 @@ do
 
 	--f:EnableKeyboard(true)
 	--f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-	if playerName == "野德一逼" or playerName == "野德威" then
+	if playerName == "野德一逼" or playerName == "肇事咕儿" then
 		f:SetScript("OnUpdate", function()
 			YdybDPSCommands()
 		end)
@@ -166,23 +166,23 @@ do
 	local tex = g:CreateTexture()
 	g.textures[0]=tex
 	tex:SetAllPoints(g)
-	tex:SetColorTexture(0.5, 0.5, 0.5)
+	tex:SetColorTexture(0.4, 0.4, 0.4)
 	g:Show()
 
 
 	
 	h = CreateFrame("Frame",nil,UIParent)
 	h:SetFrameStrata("BACKGROUND")
-	h:SetWidth(60) -- Set these to whatever height/width is needed 
-	h:SetHeight(60) -- for your Texture
+	h:SetWidth(40) -- Set these to whatever height/width is needed
+	h:SetHeight(40) -- for your Texture
 	h:SetPoint("CENTER",-250,100)
 	h.textures = {}
 	local tex = h:CreateTexture()
 	h.textures[0]=tex
 	tex:SetAllPoints(h)
-	tex:SetColorTexture(0.2, 0.2, 0.2)
+	tex:SetColorTexture(0.8, 0.3, 0.3)
 	h:Show()
-	h:Hide()
+	--h:Hide()
 
 end
 
