@@ -35,6 +35,11 @@ function ydybFeralPlay(ydyb, f, g)
             f.textures[0]:SetColorTexture(0.2, 0.2, 0.2); -- f9 猛虎
         elseif debuff_lieshangbao <= 0 and debuff_chuangshang <= 0 and debuff_lieshangxiong <= 0 then
             f.textures[0]:SetColorTexture(1, 1, 0); --3 裂伤
+        elseif cd_jinglingzhihuo <= ydyb.cd_gcd and buff_jienengshifa < 0.1 then
+                    f.textures[0]:SetColorTexture(1, 0.8, 0.8)-- 精灵之火（原变熊键位）
+        elseif buff_yemanpaoxiao <= 0.5 and energy >= 60 then
+                    f.textures[0]:SetColorTexture(1, 0, 1); --野蛮咆哮
+                    --CP>=1
         elseif buff_jienengshifa > 0.2 then
             if comboPoint == 5 and debuff_gelie == 0 then
                 f.textures[0]:SetColorTexture(0, 0, 1); --割裂
@@ -46,17 +51,14 @@ function ydybFeralPlay(ydyb, f, g)
                 f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
             end
             --elseif energy<=30 and buff_kuangbao<=0.1 and (comboPoint>=5 and debuff_gelie<=ydyb.cd_gcd+1.5)==false then
-        elseif energy <= 34 and buff_kuangbao <= 1 then
-            f.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
+--         elseif energy <= 34 and buff_kuangbao <= 1 then
+--             f.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
         elseif comboPoint <= 0 then
             if debuff_xielve <= 0 then
                 f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
             else
                 f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
             end
-        elseif buff_yemanpaoxiao <= 0.5 and energy >= 60 then
-            f.textures[0]:SetColorTexture(1, 0, 1); --野蛮咆哮
-            --CP>=1
         elseif (debuff_gelie >= 15 and buff_yemanpaoxiao >= 15 and comboPoint >= 5 and (cd_menghu < 10 or buff_kuangbao > 1)) or (ydyb.tHealth < 100000 and comboPoint >= 5) then
             f.textures[0]:SetColorTexture(0.6, 0.6, 0.6); --f11 凶猛撕咬
         elseif debuff_gelie <= 3 then
@@ -87,12 +89,14 @@ function ydybFeralPlay(ydyb, f, g)
             else
                 if debuff_xielve <= 0 and buff_yemanpaoxiao > 10 and debuff_gelie > 10 then
                     f.textures[0]:SetColorTexture(0, 1, 0); --斜掠
-                elseif energy > 70 then
-                    f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
-                elseif energy <= 35 then
-                    f.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
+--                 elseif energy > 70 then
+--                     f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
+--                 elseif energy <= 35 then
+--                     f.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
+--                 else
+--                     f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
                 else
-                    f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
+                    f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
                 end
             end
         elseif debuff_lieshangbao <= 6 and debuff_chuangshang <= 0 and debuff_lieshangxiong <= 0 then
@@ -104,9 +108,10 @@ function ydybFeralPlay(ydyb, f, g)
                 f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
             elseif energy >= 50 or buff_kuangbao > 0 or buff_jienengshifa > 0 then
                 f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
-            elseif comboPoint == 5 and energy < 50 then
-                f.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
-                --f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
+--             elseif comboPoint == 5 and energy < 50 then
+--                 f.textures[0]:SetColorTexture(1, 0.8, 0.8)--变熊
+            else
+                f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --等着
                 --f.textures[0]:SetColorTexture(1, 0, 0); --3 撕碎
             end
         end
