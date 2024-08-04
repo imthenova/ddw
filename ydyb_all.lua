@@ -141,6 +141,10 @@ do
 		f:SetScript("OnUpdate", function()
 			ScwDPSCommands()
 		end)
+	elseif playerName == "迪神挺吊" then
+    		f:SetScript("OnUpdate", function()
+    			dsdtFuryPlay()
+    		end)
 	elseif playerName == "玩家九四零" or playerName == "迪凯威" or playerName == "迪凯威威" then
 		f:SetScript("OnUpdate", function()
 			p940DPSCommands()
