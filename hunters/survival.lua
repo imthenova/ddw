@@ -37,6 +37,7 @@ function ygzSurvivalPlay(ygz, f, g)
     local currentCharges_kill_command = select(1, GetSpellCharges("杀戮命令")); -- 杀戮命令 可用次数
     local fullchargetime_kill_command = select(4, GetSpellCharges("杀戮命令")) - GetTime() + select(3, GetSpellCharges("杀戮命令"));
     local currentCharges_wildfire_bomb = select(1, GetSpellCharges("野火炸弹")); -- 野火炸弹可用次数
+    local cdTime_wildfire_bomb = select(4, GetSpellCharges("野火炸弹"));
     local fullchargetime_wildfire_bomb = select(4, GetSpellCharges("野火炸弹")) - GetTime() + select(3, GetSpellCharges("野火炸弹"));
     local cdTime_wildfire_bomb = select(4, GetSpellCharges("野火炸弹")); --野火cd时间
     local bomb_name = select(1, GetSpellInfo("野火炸弹"));

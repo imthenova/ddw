@@ -4,15 +4,15 @@ function dsdtFuryPlay(dstd,f,g)
 			--print(buff_bonegrinder);
 			--execute
 			local isZhanShaPeriod = false;
-			if dstd.tPerHealth<=35 or dstd.tPerHealth>=180 then
+			if dstd.tPerHealth<=20 or dstd.tPerHealth>=180 then
 				isZhanShaPeriod = true;
 			end
 			--单体
 			if (dstd.buff_cszj>0.5 or dstd.cd_slzw<=dstd.cd_gcd) and dstd.pPerHealth<=70 then
-				f.textures[0]:SetColorTexture(0, 1, 0) --绿色乘胜追击 5： 有乘胜追击buff，并且player血量低于 50%
-			elseif dstd.pPerHealth<=40 and dstd.rage>=60 and dstd.cd_wstk<=dstd.cd_gcd and dstd.buff_wstk<=0.1 then 
-				f.textures[0]:SetColorTexture(0.8, 0.8, 1) --暗黄色无视苦痛 c：player血量低于40%，有无视苦痛cd，没有无视痛苦buff，并且有60怒气
-			elseif isAuto and dstd.tHealth>200000 and dstd.cd_lumang<=0 and dstd.buff_lumang<=0 then -- 鲁莽好了用鲁莽
+				f.textures[0]:SetColorTexture(0, 1, 0) --绿色乘胜追击 5： 有乘胜追击buff，并且player血量低于 70%
+			--elseif dstd.pPerHealth<=30 and dstd.rage>=60 and dstd.cd_wstk<=dstd.cd_gcd and dstd.buff_wstk<=0.1 then
+			--	f.textures[0]:SetColorTexture(0.8, 0.8, 1) --暗黄色无视苦痛 c：player血量低于30%，有无视苦痛cd，没有无视痛苦buff，并且有60怒气
+			elseif isAuto and dstd.tHealth>500000 and dstd.cd_lumang<=0 and dstd.buff_lumang<=0 then -- 鲁莽好了用鲁莽
 				if dstd.cd_gcd >=0.3 then
 					f.textures[0]:SetColorTexture(0.5, 0.5, 0.5) --gcd>=0.3 等着开鲁莽
 				else
@@ -44,8 +44,8 @@ function dsdtFuryPlay(dstd,f,g)
 			--AOE
 			if (dstd.buff_cszj>0.5 or dstd.cd_slzw<=dstd.cd_gcd) and dstd.pPerHealth<=70 then
 				g.textures[0]:SetColorTexture(0, 1, 0) --绿色乘胜追击 5： 有乘胜追击buff，并且player血量低于 70%
-			elseif dstd.pPerHealth<=50 and dstd.rage>=60 and dstd.cd_wstk<=dstd.cd_gcd and dstd.buff_wstk<=0.1 then 
-				g.textures[0]:SetColorTexture(0.8, 0.8, 1) --暗黄色无视苦痛 c：player血量低于50%，有无视苦痛cd，并且有60怒气
+			--elseif dstd.pPerHealth<=50 and dstd.rage>=60 and dstd.cd_wstk<=dstd.cd_gcd and dstd.buff_wstk<=0.1 then
+			--	g.textures[0]:SetColorTexture(0.8, 0.8, 1) --暗黄色无视苦痛 c：player血量低于50%，有无视苦痛cd，并且有60怒气
 			elseif dstd.buff_xfz == nil or dstd.buff_xfz<=0.5 then
 				g.textures[0]:SetColorTexture(1, 0.8, 0.8) --藏青 旋风斩
 			elseif isAuto and dstd.tHealth>200000 and dstd.cd_lumang<=0 and dstd.buff_lumang<=0 then -- 鲁莽好了用鲁莽

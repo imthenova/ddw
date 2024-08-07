@@ -6,6 +6,21 @@ function mwGetBuffTime(spellName)
 	end
 	return buffTime;
 end
+function mwGetBuffTimeById(findSpellId)
+	local expirationTime_buff = 0;
+	for i=1,60 do
+		local name, rank, icon, count, debuffType, expirationTime, unitCaster, isStealable, _,spellId =UnitAura("player",i,nil,"HELPFUL");
+		if spellId==findSpellId then
+			expirationTime_buff = expirationTime;
+			break;
+		end
+	end
+	local buffTime=0; --buff持续时间
+	if (expirationTime_buff~=nil and expirationTime_buff~=0) then
+		buffTime= expirationTime_buff - GetTime();
+	end
+	return buffTime;
+end
 function mwGetPetBuffTime(spellName)
 	local expirationTime_buff = select(6,AuraUtil.FindAuraByName(spellName,"pet",'HELPFUL'));--buff
 	local buffTime=0; --buff持续时间
@@ -24,6 +39,35 @@ function mwGetDebuffTime(spellName)
 	return debuffTime;
 end
 
+function mwGetPlayerDebuffTime(spellName)
+	local expirationTime_buff = select(6,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));--debuff
+	local isPlayer = select(7,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));
+	local debuffTime=0; --debuff持续时间
+	if (expirationTime_buff ~=nil and expirationTime_buff ~=0 and isPlayer=="player") then
+		debuffTime = expirationTime_buff - GetTime();
+	end
+	return debuffTime;
+end
+
+function mwGetDebuffCount(spellName)
+	local count = select(3,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));--debuff
+	local debuffCount=0; --debuff持续时间
+	if (count ~=nil and count ~=0) then
+		debuffCount = count;
+	end
+	return debuffCount;
+end
+function mwGetPlayerDebuffCount(spellName)
+	local count = select(3,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));--debuff
+	local isPlayer = select(7,AuraUtil.FindAuraByName(spellName,"target",'HARMFUL'));
+	local debuffCount=0; --debuff持续时间
+	if (count ~=nil and count ~=0 and isPlayer=="player") then
+		debuffCount = count;
+	end
+	return debuffCount;
+end
+
+
 function mwGetTargetBuff(spellName)
 	local expirationTime_buff = select(6,AuraUtil.FindAuraByName(spellName,"target"));--debuff
 	local debuffTime=0; --debuff持续时间
@@ -35,6 +79,23 @@ end
 
 function mwGetCoolDown(spellName)
 	local start,durantion,enable=GetSpellCooldown(spellName); -- CD
+	local cd=0;
+	if (start~=nil and start~=0) then
+		cd=durantion + start - GetTime();
+	end
+	return cd;
+end
+function mwGetRuneCoolDown(index)
+	local start,durantion,enable=GetRuneCooldown(index); -- CD
+	local cd=0;
+	if (start~=nil and start~=0) then
+		cd=durantion + start - GetTime();
+	end
+	return cd;
+end
+
+function mwGetItemCoolDown(itemID)
+	local start,durantion,enable=GetItemCooldown(itemID); -- CD
 	local cd=0;
 	if (start~=nil and start~=0) then
 		cd=durantion + start - GetTime();
