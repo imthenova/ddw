@@ -262,7 +262,7 @@ do
     local tex = f:CreateTexture()
     f.textures[0] = tex
     tex:SetAllPoints(f)
-    tex:SetColorTexture(0.8, 1, 0.8)
+    tex:SetColorTexture(0.8, 0.8, 0.8)
     f:Show()
 
     g = CreateFrame("Frame", nil, UIParent)
